@@ -13,7 +13,7 @@ Team: [ADD TEXT HERE!]
 
 ## Architecture
 
-[ADD TEXT HERE!]
+""" wind_power_forecasting/ ├── inputs/ # Contains all the input CSV or ERA5 data files ├── outputs/ # Stores output plots and result files ├── setup.py # Setup instructions for installing the package ├── README.md # Project overview and documentation ├── main.py # Main executable script that calls and runs functions │ ├── src/ # Source code directory │ ├── init.py # Initializes the package and imports core functions │ ├── loader.py # Loads and prepares input data │ ├── plot.py # Functions for plotting timeseries and wind roses │ ├── compute_error.py # Calculates error metrics for model evaluation """
 
 ## Peer review
 
