@@ -37,3 +37,19 @@ class DataHandler:
         plt.ylabel(variable) # Sets the y-axis label to the variable name.
         plt.grid(True) # Enables grid lines on the plot for better readability.
         plt.show() # Displays the plot.
+
+
+class DataHandler:
+    """Handles loading and basic operations on input CSV files."""
+
+    def load_csv(self, filepath: str) -> pd.DataFrame:
+        """
+        Loads a CSV file into a DataFrame.
+
+        Args:
+            filepath (str): Path to the CSV file.
+
+        Returns:
+            pd.DataFrame: Loaded data.
+        """
+        return pd.read_csv(filepath)

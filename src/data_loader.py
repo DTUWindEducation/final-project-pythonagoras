@@ -40,3 +40,14 @@ def load_and_plot_data(file_path, variable_name, start_idx=0, end_idx=500):
     plt.show()                                                      # Display the plot.
 
     return data # Return the loaded dataset as a pandas DataFrame.
+
+def load_and_plot_data(filepath: str):
+    """
+    Loads data from a CSV file and plots it.
+
+    Args:
+        filepath (str): Path to the CSV file.
+    """
+    data = pd.read_csv(filepath)
+    data.plot()
+    plt.show()
