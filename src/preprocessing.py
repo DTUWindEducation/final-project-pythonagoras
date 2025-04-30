@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
-from typing import Tuple
+from sklearn.preprocessing import MinMaxScaler # For scaling features
+from typing import Tuple # For type hinting
 
 def generate_lagged_features(data: pd.DataFrame, variable: str, lag_steps: int, forecast_horizon: int = 1) -> Tuple[np.ndarray, np.ndarray]:
     """
@@ -16,9 +16,9 @@ def generate_lagged_features(data: pd.DataFrame, variable: str, lag_steps: int, 
     Returns:
         Tuple[np.ndarray, np.ndarray]: Feature matrix (X) and target vector (y).
     """
-    lagged_data = data.copy()
-    for i in range(1, lag_steps + 1):
-        lagged_data[f'{variable}_lag_{i}'] = lagged_data[variable].shift(i)
+    lagged_data = data.copy() # Create a copy of the original data to avoid modifying it
+    for i in range(1, lag_steps + 1): # Loop through the range of lag steps
+        lagged_data[f'{variable}_lag_{i}'] = lagged_data[variable].shift(i) # Create lagged features
 
     # Drop rows with NaN values caused by lagging
     lagged_data = lagged_data.dropna()
@@ -42,6 +42,6 @@ def normalize_features(X: np.ndarray) -> Tuple[np.ndarray, MinMaxScaler]:
     Returns:
         Tuple[np.ndarray, MinMaxScaler]: Normalized feature matrix and the scaler object.
     """
-    scaler = MinMaxScaler()
-    X_scaled = scaler.fit_transform(X)
-    return X_scaled, scaler
+    scaler = MinMaxScaler() # Initialize the scaler
+    X_scaled = scaler.fit_transform(X) # Fit the scaler to the data and transform it
+    return X_scaled, scaler # Return the normalized features and the scaler object for inverse transformation later

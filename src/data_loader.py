@@ -2,7 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def load_and_plot_data(file_path, variable_name, start_idx=0, end_idx=500):
+def load_and_plot_data(file_path, variable_name, start_idx=0, end_idx=None):
+    df = pd.read_csv(file_path)  # Load the dataset from the specified file
+    df= df.iloc[start_idx:end_idx]  # Select the specified range of rows
+
     """
     Load, parse, and plot the dataset.
 
@@ -32,7 +35,7 @@ def load_and_plot_data(file_path, variable_name, start_idx=0, end_idx=500):
     plt.figure(figsize=(10, 6))                                      # Create a new figure with size 10x6 inches.
     plt.plot(data[variable_name].iloc[start_idx:end_idx], label=variable_name)  # Plot the variable from start to end index.
     plt.title(f"{variable_name} over Time")                         # Set the title of the plot.
-    plt.xlabel("Index")                                             # Set the label for the x-axis.
+    plt.xlabel("Date")                                             # Set the label for the x-axis.
     plt.ylabel(variable_name)                                       # Set the label for the y-axis (same as the variable name).
     plt.legend()                                                    # Add a legend to the plot.
     plt.grid(True)                                                  # Add a grid to the plot for better readability.

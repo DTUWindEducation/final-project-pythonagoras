@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
-from src.preprocessing import generate_lagged_features,normalize_features
-from src.preprocessing import normalize_features
-from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
-from typing import Tuple
+from src.preprocessing import generate_lagged_features,normalize_features # Custom module for generating lagged features
+from src.preprocessing import normalize_features # Custom module for normalizing features
+from sklearn.preprocessing import MinMaxScaler # For scaling features
+from tensorflow.keras.models import Sequential # For building the neural network model
+from tensorflow.keras.layers import LSTM, Dense # For LSTM and Dense layers
+from typing import Tuple # For type hinting
 
 def split_train_test(X: np.ndarray, y: np.ndarray, test_ratio: float = 0.2) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
@@ -19,10 +19,10 @@ def split_train_test(X: np.ndarray, y: np.ndarray, test_ratio: float = 0.2) -> T
     Returns:
         Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]: X_train, X_test, y_train, y_test.
     """
-    split_index = int(len(X) * (1 - test_ratio))
-    X_train, X_test = X[:split_index], X[split_index:]
-    y_train, y_test = y[:split_index], y[split_index:]
-    return X_train, X_test, y_train, y_test
+    split_index = int(len(X) * (1 - test_ratio)) # Calculate the split index
+    X_train, X_test = X[:split_index], X[split_index:] # Split the features into training and testing sets
+    y_train, y_test = y[:split_index], y[split_index:] # Split the target into training and testing sets
+    return X_train, X_test, y_train, y_test # Return the training and testing sets
 
 def train_and_predict_nn(data: pd.DataFrame, variable: str, forecast_horizon: int = 1) -> Tuple[np.ndarray, np.ndarray]:
     """
@@ -49,8 +49,8 @@ def train_and_predict_nn(data: pd.DataFrame, variable: str, forecast_horizon: in
 
     # Build LSTM model
     model = Sequential([
-        LSTM(50, activation='relu', input_shape=(X_train.shape[1], 1)),
-        Dense(1)
+        LSTM(50, activation='relu', input_shape=(X_train.shape[1], 1)), # LSTM layer
+        Dense(1) # Output layer
     ])
     model.compile(optimizer='adam', loss='mse')
 
