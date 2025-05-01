@@ -4,7 +4,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
 
 # Load the data
-df = pd.read_csv("Downloads/Location1.csv", parse_dates=["Time"])
+df = pd.read_csv("inputs/Location1.csv", parse_dates=["Time"])
 df = df.sort_values("Time")
 
 # Make persistence prediction: shift Power column forward by 1 row (1 hour)

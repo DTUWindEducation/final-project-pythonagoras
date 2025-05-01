@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the data
-file_path = "Downloads/Location1.csv"  # Adjust if your path is different
+file_path = "inputs/Location1.csv"  # Adjust if your path is different
 df = pd.read_csv(file_path, parse_dates=["Time"])
 
 # Make sure the time is sorted

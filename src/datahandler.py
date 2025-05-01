@@ -1,14 +1,41 @@
-import os                      # Imports the os module for interacting with the operating system
-import pandas as pd            # Imports pandas with the alias 'pd' for data handling and analysis.
-import matplotlib.pyplot as plt # Imports the matplotlib module for plotting, aliased as 'plt'.
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class DataHandler:
     """Handles loading and basic operations on input CSV files."""
 
+    def __init__(self, input_folder: str):
+        """
+        Initializes the DataHandler with the input folder path and loads all CSV files.
+
+        Args:
+            input_folder (str): Path to the folder containing input CSV files.
+        """
+        self.input_folder = input_folder
+        self.data = self._load_all_csv_files()
+
+    def _load_all_csv_files(self) -> dict:
+        """
+        Loads all CSV files in the input folder into a dictionary.
+
+        Returns:
+            dict: A dictionary where keys are filenames and values are DataFrames.
+        """
+        data = {}
+        for filename in os.listdir(self.input_folder):
+            if filename.endswith(".csv"):
+                filepath = os.path.join(self.input_folder, filename)
+                try:
+                    data[filename] = pd.read_csv(filepath)
+                except Exception as e:
+                    print(f"Error loading {filename}: {e}")
+        return data
+
     def load_csv(self, filename: str) -> pd.DataFrame:
         """
-        Loads a CSV file into a DataFrame.
+        Loads a specific CSV file into a DataFrame.
 
         Args:
             filename (str): Name of the CSV file (without the path).
@@ -16,16 +43,12 @@ class DataHandler:
         Returns:
             pd.DataFrame: Loaded data.
         """
-           # Check if the filename already contains a path
-        if not filename.startswith("inputs/"): # If the filename does not start with 'inputs/', prepend it.
-            filepath = f"inputs/{filename}.csv" # Constructs the full path to the CSV file.
-        else:
-            filepath = filename # If it already contains a path, use it as is.
-        try: # Attempt to read the CSV file into a DataFrame.
-            data = pd.read_csv(filepath) # Reads the CSV file into a pandas DataFrame.
-            return data # Returns the loaded DataFrame.
-        except FileNotFoundError: # If the file is not found, handle the exception.
-            raise ValueError(f"File {filename} not found in inputs directory.") # Raises a ValueError with a message indicating the file was not found.
+        filepath = os.path.join(self.input_folder, filename)
+        try:
+            data = pd.read_csv(filepath)
+            return data
+        except FileNotFoundError:
+            raise ValueError(f"File {filename} not found in {self.input_folder} directory.")
 
     def plot_variable(self, filename: str, variable: str, start_idx: int = 0, end_idx: int = None):
         """
@@ -37,17 +60,15 @@ class DataHandler:
             start_idx (int): Starting index for slicing the data.
             end_idx (int): Ending index for slicing the data.
         """
-        data = self.load_csv(filename) # Loads the CSV file into a DataFrame using the load_csv method.
-        if variable not in data.columns: # Checks if the specified variable exists in the DataFrame.
-            raise ValueError(f"Column '{variable}' not found in {filename}.csv") # Raises a ValueError if the variable is not found.
+        data = self.load_csv(filename)
+        if variable not in data.columns:
+            raise ValueError(f"Column '{variable}' not found in {filename}")
 
         # Plot the variable
         plt.figure(figsize=(10, 6))
         plt.plot(data[variable].iloc[start_idx:end_idx], label=variable)
-        plt.title(f"{variable} from {filename}.csv")
+        plt.title(f"{variable} from {filename}")
         plt.xlabel("Index")
         plt.ylabel(variable)
         plt.legend()
         plt.show()
-
-
