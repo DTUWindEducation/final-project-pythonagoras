@@ -1,5 +1,5 @@
 import sys
-sys.path.append("src")  # Add this line
+sys.path.append("src") 
 
 from wind_power_forecast.loader import load_site_data
 

@@ -5,13 +5,13 @@ import numpy as np
 
 def compute_errors(y_true, y_pred):
     """
-    Calcula MAE, MSE y RMSE entre valores reales y predichos.
+    Calculates MAE, MSE y RMSE with real and predicted values 
 
-    Parámetros:
-        y_true (array-like): Valores reales
-        y_pred (array-like): Valores predichos
+    Parameters:
+        y_true (array-like): Real values
+        y_pred (array-like): Predicted values
 
-    Retorna:
+    Returns:
         dict: {'MAE': ..., 'MSE': ..., 'RMSE': ...}
     """
     mae = mean_absolute_error(y_true, y_pred)

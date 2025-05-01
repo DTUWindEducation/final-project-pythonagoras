@@ -1,24 +1,22 @@
-# src/wind_power_forecast/loader.py
-
 import pandas as pd
 
 def load_site_data(site_index):
     """
-    Carga el dataset CSV correspondiente a un sitio específico.
+    Load the CSV dataset from a specific site
     
-    Parámetros:
-        site_index (int): Número del site (1, 2, 3 or 4).
+    Parameters:
+        site_index (int): Site number (1, 2, 3 or 4).
         
-    Retorna:
-        pandas.DataFrame: DataFrame con los datos cargados y ordenados por fecha.
+    Returns:
+        pandas.DataFrame: DataFrame with the loaded data, sorted by date
     """
-    # Construir el path al archivo
+    # Build the file path
     path = f"inputs/Location{site_index}.csv"
     
-    # Cargar el CSV
+    # Load the CSV
     df = pd.read_csv(path, parse_dates=["Time"])
     
-    # Ordenar por tiempo
+    # Sort by time
     df = df.sort_values("Time")
     
     return df
