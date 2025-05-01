@@ -30,14 +30,9 @@ winddirection_100m - Wind direction in degrees (0-360) at 100 meters above the s
 windgusts_10m - Wind gusts in meters per second at 10 meters above the surface
 Power - Turbine output, normalized to be between 0 and 1 (i.e., a percentage of maximum potential output)
 
-Notes:
-	1) Likely many of these variables will not be very relevant. They are included here but do not need to be included in the final models.
-	2) Degrees are measured from 0 to 360. Since 0 and 360 represent the same spot on a circle, consider transforming these using sine and/or cosine. Also consider converting them to radians, instead of degrees.
-	3) Each location can have a different model. There is no reason to build one model to work for all locations.
+
 
 
 -------------------------------------
 -------------------------------------
-About the data source:
 
-This dataset is from a openly available dataset on the internet, it is a "CC0 1.0 Universal" license, i.e., the dataset is on the public domain and without copyrights. Check details on the license here: https://creativecommons.org/publicdomain/zero/1.0/
