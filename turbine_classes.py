@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 # flake8: noqa
+
 
 
 class GeneralWindTurbine:
