@@ -22,47 +22,6 @@ from persistence_forecast import get_persistence_forecast_data
 # Ensure the 'outputs' folder exists
 os.makedirs("outputs", exist_ok=True)
 
-# Task 7 - Function to Plot Predicted vs Actual Power Output
-def plot_predicted_vs_actual(y_true, y_pred, title="Predicted vs Actual Power Output"):
-    """
-    Plots the predicted vs real power values and saves the plot to the outputs folder.
-
-    Parameters:
-        y_true (array-like): Real power values
-        y_pred (array-like): Predicted power values
-        title (str): Title of the plot
-    """
-      # Flatten y_true and y_pred if they are 2D arrays
-    if len(y_true.shape) > 1:
-        y_true = y_true.ravel()
-    if len(y_pred.shape) > 1:
-        y_pred = y_pred.ravel()
-     # Convert to pandas.Series if necessary
-    y_true = pd.Series(y_true)
-    y_pred = pd.Series(y_pred)
-
-    plt.figure(figsize=(10, 5))
-    plt.plot(y_true.reset_index(drop=True), label="Actual Power", linewidth=2, color="blue")
-    plt.plot(y_pred.reset_index(drop=True), label="Predicted Power", linestyle="--", color="orange")
-    plt.xlabel("Time Step")
-    plt.ylabel("Power (normalized)")
-    plt.title(title)
-    plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
-
-    # Ensure the 'outputs' folder exists
-    os.makedirs("outputs", exist_ok=True)
-
-    # Save the plot to the outputs folder
-    output_filename = f"outputs/{title.replace(' ', '_').lower()}.png"
-    plt.savefig(output_filename)
-    print(f"Plot saved to {output_filename}")
-
-    # Show the plot
-    plt.show()
-
-
 
 #Task 2 - Plot Power for Location 1
 """
@@ -70,7 +29,7 @@ The `sys` module provides access to variables and functions that interact with t
 It allows manipulation of the Python interpreter's behavior, such as modifying the module search path (`sys.path`),
 retrieving command-line arguments, and handling standard input/output streams.
 """
-sys.path.append(os.path.join(os.path.dirname(__file__), '..',))
+
 #__file__:contains the path to the current file (run_4_5.py)
 #os.path.dirname(__file__):gets the directory that the current file is in (examples/)
 #os.path.join(..., '..'):means "go one folder up": examples/ -> final-project-pythonagoras/
@@ -156,56 +115,63 @@ if __name__ == "__main__":
     print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
 
 #Task 5 - Predict-Persistence ML
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-def main():
+import os
+import matplotlib.pyplot as plt
+from src.task5 import predict_persistence_model  # Correct import
 
+if __name__ == "__main__":
+    # Task 5 - Predict-Persistence ML
     input_folder = "inputs"
     site = "Power"  # Prediction of one hour ahead power output
 
-    handler = DataHandler(input_folder)
-    print("Loaded files:", handler.data.keys())  # ✅ Checkpoint 2
+    # Call the Task 5 function
+    y_true, y_pred, mse = predict_persistence_model(input_folder, site)  # Correct function call
 
-    df = handler.data["Location1.csv"]
-    print("DataFrame shape:", df.shape)
-    print("Columns:", df.columns.tolist())  # ✅ Checkpoint 3
-
-    train, test = split_data(df)
-    y_true = test[site]
-    y_pred = predict_persistence(test, site)
-
-    y_true = y_true.iloc[1:]
-    y_pred = y_pred.iloc[1:]
-
-    from sklearn.metrics import mean_squared_error
-    mse = mean_squared_error(y_true, y_pred)
-    print(f" Persistence model MSE on {site}: {mse:.4f}")
-
-    #Plot predictions vs actuals
-
+    # Plot predictions vs actuals
     plt.figure(figsize=(10, 6))
     plt.plot(y_true.index, y_true.values, label="Actual")
     plt.plot(y_pred.index, y_pred.values, label="Predicted", linestyle="--")
     plt.legend()
-    plt.title("Predicted vs Actual Power Output(Predict-Persistence)")
+    plt.title("Predicted vs Actual Power Output (Predict-Persistence)")
     plt.xlabel("Time")
     plt.ylabel("Power")
+
+    # Ensure the 'outputs' folder exists
+    os.makedirs("outputs", exist_ok=True)
+
+    # Save the plot to the outputs folder
+    plt.savefig("outputs/task5_predict_persistence_plot.png")
+    print("Plot for Task 5 saved to outputs/task5_predict_persistence_plot.png")
+
+    # Show the plot
     plt.show()
 
+#Task 6 - SVM Forecast
+
+from src.task6 import svm_forecast
+
 if __name__ == "__main__":
-    main()
-#Task 6
-sys.path.append("src")
-# 1. Load the data
-sys.path.append(os.path.join(os.path.dirname(__file__), '..',))
-# 2. Linear regression model
-y_test, y_pred = linear_forecast(df)
-# 3. Calculate errors
-errors = compute_errors(y_test, y_pred)
-# 4. Show results
-print(f"Results for site 1")
-for k, v in errors.items():
-    print(f"{k}: {v:.4f}")
+    # Load the dataset
+    df = pd.read_csv("inputs/Location1.csv")
+
+    # Call the SVM forecast function
+    y_test, y_pred = svm_forecast(df)
+
+    # Plot the results
+    plt.figure(figsize=(10, 6))
+    plt.plot(y_test, label="Actual Power", color="blue", linewidth=2)
+    plt.plot(y_pred, label="Predicted Power", color="orange", linestyle="--")
+    plt.title("SVM Forecast: Actual vs Predicted Power")
+    plt.xlabel("Time Step")
+    plt.ylabel("Power")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Save the plot
+    plt.savefig("outputs/task6_svm_forecast_plot.png")
+    plt.show()
 
 # Task 6 - Neural Network Forecast
 
@@ -235,10 +201,6 @@ if __name__ == "__main__":
     plt.savefig("outputs/task6_nn_forecast.png")  # Save the plot
     plt.show()
 
-    # Task 7
-    print("\n--- Task 7: Plot Predicted vs Actual Power Output ---")
-    plot_predicted_vs_actual(actuals, predictions, title="Task7 Predicted vs Actual Power Output")
-    plt.show()
 
 
 

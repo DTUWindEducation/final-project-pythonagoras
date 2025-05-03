@@ -1,44 +1,40 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 import pandas as pd
 import numpy as np
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-# flake8: noqa
+import pytest
+from src.task3 import simulate_forecast, evaluate_forecast
 
-"""
-    Simulates a forecast by adding Gaussian noise to the real series.
+
+@pytest.fixture
+def mock_series():
     """
-def simulate_forecast(real_series, noise_std=0.2):  #noise_stg=standard_diviation=0.2
-    #give random values from a normal (Gaussian) distribution
-    noise = np.random.normal(0, noise_std, size=len(real_series)) #0=mean
-    return real_series + noise
-
-"""
-    Computes MSE, MAE, and RMSE between real and forecasted series.
+    Creates a mock time series for testing.
     """
-def evaluate_forecast(real_series, predicted_series):
-    mse = mean_squared_error(real_series, predicted_series)
-    mae = mean_absolute_error(real_series, predicted_series)
-    rmse = np.sqrt(mse)
-    return mse, mae, rmse
+    return pd.Series([100, 110, 120, 130, 140])
 
-if __name__ == "__main__":
-    # 1. Load real data from Location1.csv
-    df = pd.read_csv("inputs/Location1.csv")
 
-    # 2. Select the variable you want (e.g., 'Power' or 'wind_speed_100m')
-    variable_name = "Power"  # Change this to "wind_speed_100m" if you want
-    real_series = df[variable_name].dropna()  # Drop NaNs if any
+def test_simulate_forecast(mock_series):
+    """
+    Tests the simulate_forecast function.
+    """
+    forecasted_series = simulate_forecast(mock_series, noise_std=0.2)
+    assert len(forecasted_series) == len(mock_series), \
+        (
+            "Forecasted series length does not match the original series"
+        )
+    assert not forecasted_series.equals(mock_series), "Forecasted series should not be identical to the original series"
 
-    # 3. Simulate a forecast
-    predicted_series = simulate_forecast(real_series)
 
-    # 4. Evaluate the forecast
-    mse, mae, rmse = evaluate_forecast(real_series, predicted_series)
+def test_evaluate_forecast(mock_series):
+    """
+    Tests the evaluate_forecast function.
+    """
+    # Simulate a forecast
+    forecasted_series = simulate_forecast(mock_series, noise_std=0.2)
 
-    # 5. Print the results
-    print(f"Results for {variable_name}:")
-    print(f"Mean Squared Error (MSE): {mse:.4f}")
-    print(f"Mean Absolute Error (MAE): {mae:.4f}")
-    print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
+    # Evaluate the forecast
+    mse, mae, rmse = evaluate_forecast(mock_series, forecasted_series)
+
+    # Assert that the metrics are non-negative
+    assert mse >= 0, "MSE should be non-negative"
+    assert mae >= 0, "MAE should be non-negative"
+    assert rmse >= 0, "RMSE should be non-negative"

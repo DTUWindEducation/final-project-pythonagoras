@@ -36,6 +36,7 @@ def test_split_train_test():
     assert len(y_train) == 80, "80% of the target should be in the training set."
     assert len(y_test) == 20, "20% of the target should be in the testing set."
 
+
 def test_train_and_predict_nn(mock_data):
     """
     Test the train_and_predict_nn function.
@@ -49,6 +50,7 @@ def test_train_and_predict_nn(mock_data):
     assert isinstance(y_test, np.ndarray), "y_test should be a numpy array."
     assert predictions.ndim == 2, "Predictions should be a 2D array (batch size, 1)."
     assert y_test.ndim == 1, "y_test should be a 1D array."
+
 
 def test_train_and_predict_nn_invalid_column(mock_data):
     """

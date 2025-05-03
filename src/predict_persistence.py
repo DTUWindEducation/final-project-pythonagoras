@@ -1,9 +1,11 @@
+"""
+This module implements a persistence model to predict one-hour-ahead power output.
+"""
+
 import pandas as pd
-# flake8: noqa
 
 
-#task 5
-def predict_persistence(df, site_column):
+def predict_persistence(df: pd.DataFrame, site_column: str) -> pd.Series:
     """
     Predict one-hour-ahead power output using the persistence model.
 
@@ -14,6 +16,4 @@ def predict_persistence(df, site_column):
     Returns:
         pd.Series: Predicted power output.
     """
-    return df[site_column].shift(1) #shifts the column by one timestep
-
-
+    return df[site_column].shift(1)  # shifts the column by one timestep

@@ -1,9 +1,16 @@
+"""Preprocessing module for time-series data.
+This module includes functions to generate lagged features,
+normalize features, and split the dataset into training and testing sets.
+"""
+from typing import Tuple  # For type hinting
+from sklearn.preprocessing import MinMaxScaler  # For scaling features
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler # For scaling features
-from typing import Tuple # For type hinting
 
-def generate_lagged_features(data: pd.DataFrame, variable: str, lag_steps: int, forecast_horizon: int = 1) -> Tuple[np.ndarray, np.ndarray]:
+
+def generate_lagged_features(
+    data: pd.DataFrame, variable: str, lag_steps: int, forecast_horizon: int = 1
+) -> Tuple[np.ndarray, np.ndarray]:
     """
     Generates lagged features for a time-series dataset.
 
@@ -16,21 +23,26 @@ def generate_lagged_features(data: pd.DataFrame, variable: str, lag_steps: int, 
     Returns:
         Tuple[np.ndarray, np.ndarray]: Feature matrix (X) and target vector (y).
     """
-    lagged_data = data.copy() # Create a copy of the original data to avoid modifying it
-    for i in range(1, lag_steps + 1): # Loop through the range of lag steps
-        lagged_data[f'{variable}_lag_{i}'] = lagged_data[variable].shift(i) # Create lagged features
+    lagged_data = (
+        data.copy()
+    )  # Create a copy of the original data to avoid modifying it
+    for i in range(1, lag_steps + 1):  # Loop through the range of lag steps
+        lagged_data[f"{variable}_lag_{i}"] = lagged_data[variable].shift(
+            i
+        )  # Create lagged features
 
     # Drop rows with NaN values caused by lagging
     lagged_data = lagged_data.dropna()
 
     # Define features (X) and target (y)
-    X = lagged_data[[f'{variable}_lag_{i}' for i in range(1, lag_steps + 1)]].values
+    X = lagged_data[[f"{variable}_lag_{i}" for i in range(1, lag_steps + 1)]].values
     y = lagged_data[variable].shift(-forecast_horizon).dropna().values
 
     # Align X and y
-    X = X[:len(y)]
+    X = X[: len(y)]
 
     return X, y
+
 
 def normalize_features(X: np.ndarray) -> Tuple[np.ndarray, MinMaxScaler]:
     """
@@ -40,8 +52,14 @@ def normalize_features(X: np.ndarray) -> Tuple[np.ndarray, MinMaxScaler]:
         X (np.ndarray): Feature matrix to be normalized.
 
     Returns:
-        Tuple[np.ndarray, MinMaxScaler]: Normalized feature matrix and the scaler object.
+        Tuple[np.ndarray, MinMaxScaler]: Normalized feature matrix and the
+        scaler object.
     """
-    scaler = MinMaxScaler() # Initialize the scaler
-    X_scaled = scaler.fit_transform(X) # Fit the scaler to the data and transform it
-    return X_scaled, scaler # Return the normalized features and the scaler object for inverse transformation later
+    scaler = MinMaxScaler()
+    # Initialize the scaler
+    X_scaled = scaler.fit_transform(X)  # Fit the scaler to the data and transform it
+    return (
+        X_scaled,
+        scaler
+    )  # Return the normalized features and the scaler object
+       # for inverse transformation later

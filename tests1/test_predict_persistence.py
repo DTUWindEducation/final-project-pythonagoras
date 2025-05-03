@@ -1,6 +1,3 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 import pandas as pd
 import pytest
 from src.predict_persistence import predict_persistence

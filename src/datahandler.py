@@ -1,3 +1,7 @@
+"""
+This module provides the DataHandler class for loading and performing basic operations
+on input CSV files.
+"""
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -29,7 +33,10 @@ class DataHandler:
                 filepath = os.path.join(self.input_folder, filename)
                 try:
                     data[filename] = pd.read_csv(filepath)
-                except Exception as e:
+                except pd.errors.ParserError as e:
+                    print(f"Parser error loading {filename}: {e}")
+                except OSError as e:
+                    print(f"OS error loading {filename}: {e}")
                     print(f"Error loading {filename}: {e}")
         return data
 
@@ -47,8 +54,10 @@ class DataHandler:
         try:
             data = pd.read_csv(filepath)
             return data
-        except FileNotFoundError:
-            raise ValueError(f"File {filename} not found in {self.input_folder} directory.")
+        except FileNotFoundError as exc:
+            raise ValueError(
+                f"File {filename} not found in {self.input_folder} directory."
+            ) from exc
 
     def plot_variable(self, filename: str, variable: str, start_idx: int = 0, end_idx: int = None):
         """

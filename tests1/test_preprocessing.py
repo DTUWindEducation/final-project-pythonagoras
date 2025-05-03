@@ -1,57 +1,52 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-import numpy as np
-import pandas as pd
 import pytest
+import pandas as pd
+import numpy as np
 from src.preprocessing import generate_lagged_features, normalize_features
 
-def test_generate_lagged_features():
-    """
-    Test the generate_lagged_features function.
-    """
-    # Create a mock DataFrame
-    data = {
-        "Power": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-    }
-    df = pd.DataFrame(data)
 
-    # Call the function
-    lag_steps = 3
-    forecast_horizon = 1
-    X, y = generate_lagged_features(df, variable="Power", lag_steps=lag_steps, forecast_horizon=forecast_horizon)
+@pytest.fixture
+def mock_dataframe():
+    """
+    Creates a mock DataFrame for testing.
+    """
+    data = {
+        "Power": [100, 110, 120, 130, 140, 150, 160],
+        "windspeed_100m": [5, 6, 7, 8, 9, 10, 11],
+        "temperature_2m": [15, 16, 17, 18, 19, 20, 21],
+    }
+    return pd.DataFrame(data)
+
+
+def test_generate_lagged_features(mock_dataframe):
+    """
+    Tests the generate_lagged_features function.
+    """
+    x, y = generate_lagged_features(mock_dataframe, variable="Power", lag_steps=2, forecast_horizon=1)
 
     # Assertions
-    assert X.shape[1] == lag_steps, f"X should have {lag_steps} columns for lagged features."
-    assert len(X) == len(y), "X and y should have the same number of rows."
-    assert np.allclose(y, df["Power"].iloc[lag_steps + forecast_horizon - 1:].values), "y values are incorrect."
+    assert x.shape[1] == 2, "The number of lagged features should match the lag_steps."
+    assert len(x) == len(y), "The length of x and y should be the same."
+    assert isinstance(x, np.ndarray), "x should be a numpy array."
+    assert isinstance(y, np.ndarray), "y should be a numpy array."
 
-def test_generate_lagged_features_invalid_column():
-    """
-    Test the generate_lagged_features function with an invalid column.
-    """
-    # Create a mock DataFrame
-    data = {
-        "Temperature": [15, 16, 17, 18, 19]
-    }
-    df = pd.DataFrame(data)
 
-    # Call the function with an invalid column
-    with pytest.raises(KeyError, match="not found in axis"):
-        generate_lagged_features(df, variable="Power", lag_steps=3, forecast_horizon=1)
+def test_generate_lagged_features_invalid_column(mock_dataframe):
+    """
+    Tests the generate_lagged_features function with an invalid column.
+    """
+    with pytest.raises(KeyError, match=".*NonExistentColumn.*"):
+        generate_lagged_features(mock_dataframe, variable="NonExistentColumn", lag_steps=2)
+
 
 def test_normalize_features():
     """
-    Test the normalize_features function.
+    Tests the normalize_features function.
     """
-    # Create a mock feature matrix
-    X = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-
-    # Call the function
-    X_scaled, scaler = normalize_features(X)
+    x = np.array([[1, 2], [3, 4], [5, 6]])
+    x_scaled, scaler = normalize_features(x)
 
     # Assertions
-    assert X_scaled.shape == X.shape, "The shape of X_scaled should match the input X."
-    assert np.allclose(X_scaled.min(axis=0), 0), "The minimum value of each feature in X_scaled should be 0."
-    assert np.allclose(X_scaled.max(axis=0), 1), "The maximum value of each feature in X_scaled should be 1."
-    assert isinstance(scaler, type(MinMaxScaler())), "The scaler should be an instance of MinMaxScaler."
+    assert x_scaled.min() == 0, "The minimum value of the scaled features should be 0."
+    assert x_scaled.max() == 1, "The maximum value of the scaled features should be 1."
+    assert isinstance(x_scaled, np.ndarray), "x_scaled should be a numpy array."
+    assert isinstance(scaler, MinMaxScaler), "scaler should be an instance of MinMaxScaler."

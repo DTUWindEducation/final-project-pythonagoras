@@ -1,8 +1,13 @@
-import pandas as pd
-# flake8: noqa
+"""
+This module provides a function to split a dataset into training and testing sets.
+"""
 
-#task 4
-def split_data(df, train_fraction=0.68): #0.68 specifies the % of the data will be used for training
+import pandas as pd
+
+
+def split_data(
+    df: pd.DataFrame, train_fraction: float = 0.68
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Split the dataset into train and test sets.
 
@@ -11,10 +16,9 @@ def split_data(df, train_fraction=0.68): #0.68 specifies the % of the data will 
         train_fraction (float): Fraction of data to use for training.
 
     Returns:
-        (pd.DataFrame, pd.DataFrame): (train_set, test_set)
+        tuple[pd.DataFrame, pd.DataFrame]: (train_set, test_set)
     """
-    n_train = int(len(df) * train_fraction) #defines how many rows will be used for training, 
-    #converting the result to an integer
-    train = df.iloc[:n_train] #Select the training set as the first portion of the data up to the split index
-    test = df.iloc[n_train:] #Select the test set as the remaining portion of the data after the split index
-    return train, test 
+    n_train = int(len(df) * train_fraction)  # Calculate the number of rows for training
+    train = df.iloc[:n_train]  # Select the training set
+    test = df.iloc[n_train:]  # Select the test set
+    return train, test

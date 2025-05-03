@@ -1,12 +1,10 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-import sys
-print("\n".join(sys.path))
-
-from src.compute_errors import compute_errors
 import numpy as np
-import pytest
+from src.compute_errors import compute_errors
+print("\n".join(sys.path))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
 
 def test_compute_errors():
     # Mock data

@@ -1,10 +1,11 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-import os
 import pandas as pd
 import pytest
 from src.datahandler import DataHandler
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
+
 
 @pytest.fixture
 def mock_input_folder(tmp_path):
@@ -28,8 +29,8 @@ def mock_input_folder(tmp_path):
     file2 = tmp_path / "mock_data2.csv"
     pd.DataFrame(data1).to_csv(file1, index=False)
     pd.DataFrame(data2).to_csv(file2, index=False)
-
     return tmp_path
+
 
 def test_load_all_csv_files(mock_input_folder):
     """
@@ -40,6 +41,7 @@ def test_load_all_csv_files(mock_input_folder):
     assert "mock_data1.csv" in handler.data, "mock_data1.csv should be loaded"
     assert "mock_data2.csv" in handler.data, "mock_data2.csv should be loaded"
 
+
 def test_load_csv(mock_input_folder):
     """
     Test the load_csv method.
@@ -49,6 +51,7 @@ def test_load_csv(mock_input_folder):
     assert isinstance(data, pd.DataFrame), "The returned object should be a pandas DataFrame"
     assert "Power" in data.columns, "The DataFrame should contain the 'Power' column"
 
+
 def test_load_csv_file_not_found(mock_input_folder):
     """
     Test the load_csv method with a non-existent file.
@@ -57,6 +60,7 @@ def test_load_csv_file_not_found(mock_input_folder):
     with pytest.raises(ValueError, match="File non_existent.csv not found in"):
         handler.load_csv("non_existent.csv")
 
+
 def test_plot_variable(mock_input_folder):
     """
     Test the plot_variable method.
@@ -64,6 +68,7 @@ def test_plot_variable(mock_input_folder):
     handler = DataHandler(input_folder=mock_input_folder)
     # Ensure no exceptions are raised during plotting
     handler.plot_variable("mock_data1.csv", "Power", start_idx=0, end_idx=2)
+
 
 def test_plot_variable_missing_column(mock_input_folder):
     """
