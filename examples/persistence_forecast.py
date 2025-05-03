@@ -2,39 +2,43 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-# Load the data
-df = pd.read_csv("inputs/Location1.csv", parse_dates=["Time"])
-df = df.sort_values("Time")
 
-# Make persistence prediction: shift Power column forward by 1 row (1 hour)
-df["Predicted_Power"] = df["Power"].shift(1)
+def get_persistence_forecast_data(file_path):
+    """
+    Prepares data for persistence forecasting.
 
-# Drop the first row (since it has no prediction)
-df = df.dropna(subset=["Predicted_Power"])
+    Args:
+        file_path (str): Path to the CSV file.
 
-# Actual and predicted values
-y_true = df["Power"]
-y_pred = df["Predicted_Power"]
+    Returns:
+        tuple: A tuple containing (time, y_true, y_pred, metrics_dict).
+    """
+    # Load the data
+    df = pd.read_csv(file_path, parse_dates=["Time"])
+    df = df.sort_values("Time")
+    # Make persistence prediction: shift Power column forward by 1 row (1 hour)
+    df["Predicted_Power"] = df["Power"].shift(1)
 
-# Calculate error metrics
-mse = mean_squared_error(y_true, y_pred)
-mae = mean_absolute_error(y_true, y_pred)
-rmse = np.sqrt(mse)
+    # Drop the first row (since it has no prediction)
+    df = df.dropna(subset=["Predicted_Power"])
 
-print("📈 Persistence Model Results:")
-print(f"MAE  = {mae:.4f}")
-print(f"MSE  = {mse:.4f}")
-print(f"RMSE = {rmse:.4f}")
+    # Actual and predicted values
+    y_true = df["Power"]
+    y_pred = df["Predicted_Power"]
 
-# Plot a slice of real vs predicted values
-plt.figure(figsize=(12, 5))
-plt.plot(df["Time"][:200], y_true[:200], label="Actual Power", color="green")
-plt.plot(df["Time"][:200], y_pred[:200], label="Predicted (Persistence)", color="orange")
-plt.title("Actual vs Persistence Forecast (First 200 hours)")
-plt.xlabel("Time")
-plt.ylabel("Power")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
+    # Calculate error metrics
+    mse = mean_squared_error(y_true, y_pred)
+    mae = mean_absolute_error(y_true, y_pred)
+    rmse = np.sqrt(mse)
+
+    metrics = {
+        "MAE": mae,
+        "MSE": mse,
+        "RMSE": rmse
+    }
+
+    return df["Time"], y_true, y_pred, metrics

@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt # For plotting
 
 def main():
     # Load data
-    data_handler = DataHandler() # Create an instance of DataHandler
-    data = data_handler.load_csv("Location1") # Load the CSV file "Location1.csv" from the 'inputs' directory
+    data_handler = DataHandler("inputs") # Create an instance of DataHandler
+    data = data_handler.load_csv("Location1.csv") # Load the CSV file "Location1.csv" from the 'inputs' directory
 
     # Train and predict
     predictions, actuals = train_and_predict_nn(data, variable="Power") # Call the function to train the model and get predictions
