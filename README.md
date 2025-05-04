@@ -32,11 +32,11 @@ cd final-project-pythonagoras
 2. Install the needed Python packages either on Visual Studio or GitBash (terminal)
 
 ```bash
-pip install pandas numpy scikit-learn matplotlib  tensorflow.keras pickle 
+pip install pandas numpy scikit-learn matplotlib  tensorflow pickle 
 ```
 
 3. Run the project:
-   1st Option: Open Visual Studio and then the folder that you have already clone. Go to folder "examples" and then RUN the main.py script
+   Open Visual Studio and then the folder that you have already clone. Go to folder "examples" and then RUN the main.py script
    After every plot that gets generated, PRESS the X button to the plot window to keep running the code
 
 **2nd Option**: **If Python version is too new (3.12)**
