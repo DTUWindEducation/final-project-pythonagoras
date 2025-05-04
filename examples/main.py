@@ -15,6 +15,8 @@ from src.model_linear import linear_forecast
 from src.compute_errors import compute_errors
 from src.datahandler import DataHandler
 from src.model_nn import train_and_predict_nn
+from src.task5 import predict_persistence_model
+from src.task6 import svm_forecast
 sys.path.append(os.path.join(os.path.dirname(__file__), 'examples'))
 from persistence_forecast import get_persistence_forecast_data
 
@@ -29,7 +31,7 @@ The `sys` module provides access to variables and functions that interact with t
 It allows manipulation of the Python interpreter's behavior, such as modifying the module search path (`sys.path`),
 retrieving command-line arguments, and handling standard input/output streams.
 """
-
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 #__file__:contains the path to the current file (run_4_5.py)
 #os.path.dirname(__file__):gets the directory that the current file is in (examples/)
 #os.path.join(..., '..'):means "go one folder up": examples/ -> final-project-pythonagoras/
@@ -115,13 +117,8 @@ if __name__ == "__main__":
     print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
 
 #Task 5 - Predict-Persistence ML
-
-import os
-import matplotlib.pyplot as plt
-from src.task5 import predict_persistence_model  # Correct import
-
 if __name__ == "__main__":
-    # Task 5 - Predict-Persistence ML
+   
     input_folder = "inputs"
     site = "Power"  # Prediction of one hour ahead power output
 
@@ -148,8 +145,6 @@ if __name__ == "__main__":
     plt.show()
 
 #Task 6 - SVM Forecast
-
-from src.task6 import svm_forecast
 
 if __name__ == "__main__":
     # Load the dataset
