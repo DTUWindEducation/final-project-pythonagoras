@@ -132,18 +132,21 @@ wind_power_forecasting/
 │
 ├── tests1/ # Unit tests for modules
 │ ├── test_compute_errors.py
-│ ├── test_data_loader.py
+│ ├── test_data_handler.py
+│ ├──test_data_loader.py
 │ ├── test_features.py
 │ ├── test_model_linear.py
 │ ├── test_model_nn.py
 │ ├── test_predict_persistence.py
 │ ├── test_preprocessing.py
 │ ├── test_split_data.py
+│ └── test_task3.py
 │ └── test_task5.py
+│ └── test_task6.py
 │
 ├── README.md # Project documentation
 ├── pytest.ini # pytest configuration
-└── .coverage # Test coverage tracking
+
 ```
 
 ### Architecture Diagram
@@ -168,10 +171,10 @@ wind_power_forecasting/
     │              Forecasting Models (Task 3, 5, 6)         │
     │ ┌────────────────────────┬───────────────────────────┐ │
     │ │  simulate_forecast     │  predict_persistence      │ │
-    │ │  (task3.py)            │  (predict_persistence.py) │ │
-    │ │                        └──────────────┬────────────┘ │
-    │ │  linear_regression     │              │              │
-    │ │  (model_linear.py)     │      SVM, NN Models         │
+    │ │  compute MAE,MSE,RMSE  │  (predict_persistence.py) │ │
+    │ │    (task3.py)          └──────────────┬────────────┘ │
+    │ │                        │              │              │
+    │ │                        │      SVM, NN Models         │
     │ │                        │ (task6.py, model_nn.py)     │
     │ └────────────┬───────────┴────────────────────────────┘
                    │
@@ -213,33 +216,27 @@ It plots a variable from a location.
 ## Peer Review
 
 The code was reviewed together by all groupmembers. The method that we followed was to divide the tasks to the three of us and discussed it in person for better communication.
+Everything was reviewed by all group members. Code and logic were discussed collaboratively during development.
 We checked:
 
 - That functions had clear names and comments
 - That the plots were working
 - The code runs at a proper time in less than 10 min
-- 
-
+  
 After that, we cleaned the main code and pushed the final version to GitHub.
 
 ## Final Test Run
 
-To test all the steps:
-
-```bash
-PYTHONPATH=src python3 main.py
-```
-
 Expected output:
 
 ```
+Results for site Location1.csv applying normal (Gaussian) distribution:
+Mean Squared Error (MSE): 0.0400
+Mean Absolute Error (MAE): 0.1594
+Root Mean Squared Error (RMSE): 0.1999
 Persistence model MSE on Power: 0.0014
-Results for site Location1.csv:
-MAE: 0.1469
-MSE: 0.0338
-RMSE: 0.1840
 ```
 
-Everything was reviewed by all group members. Code and logic were discussed collaboratively during development.
+
 
 
