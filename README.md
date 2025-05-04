@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://github.com/DTUWindEducation/46120-PiWE/tree/main/week08_final_project_intro)
-
 ## Wind Power Forecasting
 Team: Pythonagoras
 
