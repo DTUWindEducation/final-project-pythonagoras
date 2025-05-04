@@ -15,6 +15,7 @@ from src.model_linear import linear_forecast
 from src.compute_errors import compute_errors
 from src.datahandler import DataHandler
 from src.model_nn import train_and_predict_nn
+from src.task6 import svm_forecast
 sys.path.append(os.path.join(os.path.dirname(__file__), 'examples'))
 from persistence_forecast import get_persistence_forecast_data
 
@@ -116,9 +117,6 @@ if __name__ == "__main__":
 
 #Task 5 - Predict-Persistence ML
 
-import os
-import matplotlib.pyplot as plt
-from src.task5 import predict_persistence_model  # Correct import
 
 if __name__ == "__main__":
     # Task 5 - Predict-Persistence ML
@@ -149,7 +147,6 @@ if __name__ == "__main__":
 
 #Task 6 - SVM Forecast
 
-from src.task6 import svm_forecast
 
 if __name__ == "__main__":
     # Load the dataset
