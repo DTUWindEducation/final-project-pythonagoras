@@ -41,56 +41,6 @@ pip install pandas numpy scikit-learn matplotlib os tensorflow.keras pickle Tupl
    After every plot that gets generated, PRESS the X button to the plot window to keep running the code
 
 --------------------------------------------------------------------------------------------------------------------------------
-
-Now, a step-by-step of what we did
-
-Step 1: Set up a GitHub repo
-
-- Cloned the GitHub Classroom project
-- Created new branches with our names
-
-Step 2: Wrote the first scripts
-
-- Made `plot_timeseries.py` to draw timeseries plots
-- Created `persistence_forecast.py` to make a simple forecast model
-- Plotted and printed data to check that everything worked
-
-Step 3: Created the folder structure
-
-We made the full structure with folders:
-
-```
-inputs/, outputs/, examples/, tests/, src/wind_power_forecast/
-```
-
-Step 4: Added files to `src/`
-
-- `loader.py` to load CSV files for each location
-- `compute_error.py` for MAE, MSE, RMSE
-- `model_linear.py` to train and predict with regression
-- Pushed all our codes to GitHub and made pull requests one by one
-
-Step 5: Fixed input data
-
-- The `inputs/` folder was missing because `.csv` files were not added to Git
-- We added the files manually to test locally
-
-Step 6: Wrote test files
-
-- `test_loader.py` checked that files loaded correctly
-- `test_errors.py` tested the error function with small fake data
-
-Step 7: Made `main.py`
-
-- This script brings together all tasks from 2 to 6 and unifies all the different codes
-- It runs the forecast, evaluation, and plots everything in one place
-
-Step 8: Final push
-
-- Cleaned the repo
-- Moved example files to the correct folders
-- Ran final tests
-
 ## Architecture
 
 ```
