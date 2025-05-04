@@ -37,7 +37,8 @@ cd final-project-pythonagoras
 pip install pandas numpy scikit-learn matplotlib os tensorflow.keras pickle Tuple
 ```
 
-3. Run the project: Open Visio Studio and then the folder that you have already clone. Go to file exercises and then RUN the main.py script
+3. Run the project: Open Visio Studio and then the folder that you have already clone. Go to folder "examples" and then RUN the main.py script
+   After every plot that gets generated, PRESS the X button to the plot window to keep running the code
 
 --------------------------------------------------------------------------------------------------------------------------------
 
