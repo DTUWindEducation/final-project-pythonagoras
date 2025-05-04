@@ -53,6 +53,8 @@ wind_power_forecasting/
 ├── outputs/ # Stores generated plots and output data
 │ └── *.png
 │
+├── htmlcov #optional file
+
 ├── examples/ # Demo scripts and helper tools
 │ ├── main.py
 │ ├── plot_timeseries.py
@@ -77,7 +79,7 @@ wind_power_forecasting/
 │ ├── task5.py # Predict-persistence implementation
 │ └── task6.py # SVM-based power forecasting
 │
-├── tests1/ # Unit tests for modules
+├── tests/ # Unit tests for modules
 │ ├── test_compute_errors.py
 │ ├── test_data_handler.py
 │ ├──test_data_loader.py
