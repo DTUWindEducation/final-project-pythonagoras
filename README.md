@@ -137,27 +137,41 @@ wind_power_forecasting/
 ### Architecture Diagram
 
 ```text
-+------------------+       +-----------------+
-| inputs/*.csv     +<----->+ DataHandler     |
-+--------+---------+       +--------+--------+
-                                 |
-                                 v
-                        +--------+--------+
-                        | split_data.py   |
-                        +--------+--------+
-                                 |
-                  +--------------+--------------+
-                  |                             |
-          +-------v-------+             +-------v--------+
-          | predict_      |             | model_linear   |
-          | persistence.py|             |.py (regression)|
-          +-------+-------+             +-------+--------+
-                  |                             |
-                  +--------------+--------------+
-                                 v
-                        +--------+--------+
-                        | compute_errors  |
-                        +-----------------+
+                      ┌────────────────────────┐
+                      │     CSV Input Files    │
+                      │   (inputs/*.csv)       │
+                      └──────────┬─────────────┘
+                                 │
+                  ┌──────────────▼─────────────┐
+                  │    DataHandler Class       │
+                  │ (src/datahandler.py)       │
+                  └──────────────┬─────────────┘
+                                 │
+           ┌────────────────────▼────────────────────┐
+           │    Preprocessing Functions              │
+           │ (src/preprocessing.py, src/features.py) │
+           └────────────────────┬────────────────────┘
+                                │
+    ┌───────────────────────────▼────────────────────────────┐
+    │              Forecasting Models (Task 3, 5, 6)         │
+    │ ┌────────────────────────┬───────────────────────────┐ │
+    │ │  simulate_forecast     │  predict_persistence      │ │
+    │ │  (task3.py)            │  (predict_persistence.py) │ │
+    │ │                        └──────────────┬────────────┘ │
+    │ │  linear_regression     │              │              │
+    │ │  (model_linear.py)     │      SVM, NN Models         │
+    │ │                        │ (task6.py, model_nn.py)     │
+    │ └────────────┬───────────┴────────────────────────────┘
+                   │
+       ┌───────────▼────────────┐
+       │   compute_errors.py    │ ← Evaluate MAE, MSE, RMSE
+       └───────────┬────────────┘
+                   │
+       ┌───────────▼────────────┐
+       │   Visual Output        │ ← Plots (matplotlib)
+       │   (outputs/*.png)      │
+       └────────────────────────┘
+
 ```
 
 ##  Implemented Classes
