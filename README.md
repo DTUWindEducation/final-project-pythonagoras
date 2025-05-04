@@ -34,7 +34,7 @@ cd final-project-pythonagoras
 2. Install the needed Python packages
 
 ```bash
-pip install pandas numpy scikit-learn matplotlib
+pip install pandas numpy scikit-learn matplotlib os tensorflow.keras pickle Tuple
 ```
 
 3. Run the project: Open Visio Studio and then the folder that you have already clone. Go to file exercises and then RUN the main.py script
