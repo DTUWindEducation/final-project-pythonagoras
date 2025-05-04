@@ -177,11 +177,10 @@ After that, we cleaned the main code and pushed the final version to GitHub.
 Expected output:
 
 ```
-Results for site Location1.csv applying normal (Gaussian) distribution:
-Mean Squared Error (MSE): 0.0400
-Mean Absolute Error (MAE): 0.1594
-Root Mean Squared Error (RMSE): 0.1999
-Persistence model MSE on Power: 0.0014
+ 1) 1st plot: Power for Location 1 for the first 200 rows
+ 2) Results for site Location1.csv applying normal (Gaussian) distribution
+ 3) Persistence model MSE on Power and plot of Persistence Model vs Real Data
+ 4) Plots of Neural Netwoek vs Real Data and Support Vector Machine vs Real Data
 ```
 
 
