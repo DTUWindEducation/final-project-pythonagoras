@@ -40,12 +40,13 @@ pip install pandas numpy scikit-learn matplotlib  tensorflow.keras pickle
    After every plot that gets generated, PRESS the X button to the plot window to keep running the code
 
 **2nd Option**: **If Python version is too new (3.12)**
-Open Anaconda -> run: conda create -n tfenv python 3.9 (create a new Conda environment with Python 3.9 and TensorFlow)
-  -> pip install tensorflow
-  -> pip install pandas
-  -> pip install matplotlib
-  -> pip install scikit-learn
-  -> run python examples/main.py (**After every plot that gets generated, PRESS the X button to the plot window to keep running the code**)
+Open Anaconda 
+   1) run: conda create -n tfenv python 3.9 (create a new Conda environment with Python 3.9 and TensorFlow)
+   2) pip install tensorflow
+   3) pip install pandas
+   4) pip install matplotlib
+   5) pip install scikit-learn
+   6) run python examples/main.py (**After every plot that gets generated, PRESS the X button to the plot window to keep running the code**)
 
 --------------------------------------------------------------------------------------------------------------------------------
 ## Architecture
