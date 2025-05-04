@@ -27,7 +27,7 @@ First, the installation instructions are as follows.
 git clone https://github.com/DTUWindEducation/final-project-pythonagoras.git
 cd final-project-pythonagoras
 ```
-**2. Step: Installation of libraries and Run**
+**2. Step: Installation of packages and Run**
 
 **-1st Option:**
 2. Install the needed Python packages either on Visual Studio or GitBash (terminal)
