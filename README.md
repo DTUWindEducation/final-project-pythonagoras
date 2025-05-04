@@ -1,7 +1,6 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/zjSXGKeR)
+[![Review Assignment Due Date](https://github.com/DTUWindEducation/46120-PiWE/tree/main/week08_final_project_intro)
 
-# Our Great Package
-
+## Wind Power Forecasting
 Team: Pythonagoras
 
 ## Overview
