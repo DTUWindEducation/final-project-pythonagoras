@@ -21,12 +21,13 @@ This package was created as part of the course "Scientific Programming for Wind 
 
 First, the installation instructions are as follows.
 
-1. Clone the repository
+**1. Step : Clone the repository**
  
 ```bash
 git clone https://github.com/DTUWindEducation/final-project-pythonagoras.git
 cd final-project-pythonagoras
 ```
+**2. Step: Installation of libraries and Run**
 
 **-1st Option:**
 2. Install the needed Python packages either on Visual Studio or GitBash (terminal)
@@ -41,7 +42,8 @@ pip install pandas numpy scikit-learn matplotlib  tensorflow pickle
 
 **2nd Option**: **If Python version is too new (3.12)**
 Open Anaconda or Gitbash
-   1)cd final-project-pythonagoras
+
+   1) cd final-project-pythonagoras
    2) run: conda create -n tfenv python 3.9 (create a new Conda environment with Python 3.9 and TensorFlow)
    3) conda activate tfenv
    4) pip install tensorflow
