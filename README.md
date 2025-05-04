@@ -40,14 +40,15 @@ pip install pandas numpy scikit-learn matplotlib  tensorflow pickle
    After every plot that gets generated, PRESS the X button to the plot window to keep running the code
 
 **2nd Option**: **If Python version is too new (3.12)**
-Open Anaconda 
-   1) run: conda create -n tfenv python 3.9 (create a new Conda environment with Python 3.9 and TensorFlow)
-   2) pip install tensorflow
-   3) pip install pandas
-   4) pip install matplotlib
-   5) pip install scikit-learn
-   6) cd final-project-pythonagoras
-   7) run python examples/main.py (**After every plot that gets generated, PRESS the X button to the plot window to keep running the code**)
+Open Anaconda or Gitbash
+   1)cd final-project-pythonagoras
+   2) run: conda create -n tfenv python 3.9 (create a new Conda environment with Python 3.9 and TensorFlow)
+   3) conda activate tfenv
+   4) pip install tensorflow
+   5) pip install pandas
+   6) pip install matplotlib
+   7) pip install scikit-learn
+   8) run python examples/main.py (**After every plot that gets generated, PRESS the X button to the plot window to keep running the code**)
 
 --------------------------------------------------------------------------------------------------------------------------------
 ## Architecture
