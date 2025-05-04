@@ -46,7 +46,8 @@ Open Anaconda
    3) pip install pandas
    4) pip install matplotlib
    5) pip install scikit-learn
-   6) run python examples/main.py (**After every plot that gets generated, PRESS the X button to the plot window to keep running the code**)
+   6) cd final-project-pythonagoras
+   7) run python examples/main.py (**After every plot that gets generated, PRESS the X button to the plot window to keep running the code**)
 
 --------------------------------------------------------------------------------------------------------------------------------
 ## Architecture
