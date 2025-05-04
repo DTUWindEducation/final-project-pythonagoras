@@ -26,11 +26,9 @@ cd final-project-pythonagoras
 pip install pandas numpy scikit-learn matplotlib
 ```
 
-3. Run the project
+3. Run the project: Open Visio Studio and then the folder that you have already clone. Go to file exercises and then RUN the main.py script
 
-```bash
-PYTHONPATH=src python3 main.py
-```
+--------------------------------------------------------------------------------------------------------------------------------
 
 Now, a step-by-step of what we did
 
@@ -84,21 +82,56 @@ Step 8: Final push
 ## Architecture
 
 ```
+final-project-pythonagoras/
 wind_power_forecasting/
-├── inputs/                 # Input CSV data files
-├── outputs/                # Plots and outputs
-├── examples/               # Example scripts
-│   └── test_errors.py      # Test for compute_errors()
-├── src/                    # Main code
-│       ├── datahandler.py         # Class to load the CSVs
-│       ├── compute_errors.py      # Calculates MSE, MAE, RMSE
-│       ├── model_linear.py        # Linear regression model
-│       ├── predict_persistence.py # Simple forecast
-│       ├── plot_timeseries.py     # Makes timeseries plots
-│       ├── split_data.py          # Splits into train/test
-│       ├── task3.py               # simulate and evaluate forecast
-├── main.py                # Main script
-├── README.md              # Documentation
+├── inputs/ # Contains input CSV files (e.g., Location1.csv)
+│ ├── Location1.csv
+│ ├── Location2.csv
+│ ├── Location3.csv
+│ ├── Location4.csv
+│ └── readme.txt
+│
+├── outputs/ # Stores generated plots and output data
+│ └── *.png
+│
+├── examples/ # Demo scripts and helper tools
+│ ├── main.py
+│ ├── plot_timeseries.py
+│ ├── persistence_forecast.py # Example for persistence forecasting
+│ ├── run_4_5.py
+│ ├── run_data_loader.py
+│ ├── run_datahandler.py
+│ └── run_nn_forecast.py
+│
+├── src/ # Core source code
+│ ├── init.py
+│ ├── compute_errors.py # Error metric calculations (MAE, MSE, RMSE)
+│ ├── data_loader.py # Standalone function to load and plot data
+│ ├── datahandler.py # Class to manage multiple CSVs
+│ ├── features.py # Feature engineering tools
+│ ├── model_linear.py # Linear regression forecasting model
+│ ├── model_nn.py # Neural network model definition
+│ ├── predict_persistence.py # One-step-ahead prediction baseline
+│ ├── preprocessing.py # Lag generation and normalization
+│ ├── split_data.py # Train/test data splitter
+│ ├── task3.py # Simulated forecasts and evaluation
+│ ├── task5.py # Predict-persistence implementation
+│ └── task6.py # SVM-based power forecasting
+│
+├── tests1/ # Unit tests for modules
+│ ├── test_compute_errors.py
+│ ├── test_data_loader.py
+│ ├── test_features.py
+│ ├── test_model_linear.py
+│ ├── test_model_nn.py
+│ ├── test_predict_persistence.py
+│ ├── test_preprocessing.py
+│ ├── test_split_data.py
+│ └── test_task5.py
+│
+├── README.md # Project documentation
+├── pytest.ini # pytest configuration
+└── .coverage # Test coverage tracking
 ```
 
 ### Architecture Diagram
