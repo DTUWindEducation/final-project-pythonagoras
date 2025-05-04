@@ -6,8 +6,19 @@ Team: Pythonagoras
 
 ## Overview
 
-This package was made to forecast wind power production one hour ahead. It uses two models: one very simple (the persistence model), and one based on machine learning (linear regression). 
-We use time series data that comes from ERA5 and contains wind data for four locations. We also include error calculations to see how good the predictions are. This project was made as part of the Scientific Programming in Wind Energy course at DTU.
+This Python package was developed to support short-term wind power forecasting, specifically targeting 1-hour-ahead predictions using a combination of machine learning (ML) techniques. It leverages a real-world dataset based on ERA5 reanalysis data, which includes meteorological observations (such as wind speed, direction, and temperature) and normalized wind power production data for four different locations.
+
+The package implements and compares three forecasting approaches:
+
+ 1) Persistence Model: A simple baseline that assumes future values equal current ones.
+
+ 2) Support Vector Machine (SVM): A supervised ML method used for non-linear regression.
+
+ 3) Neural Network (NN): A data-driven model that captures complex relationships in time series.
+
+The library includes modules for data loading, preprocessing (e.g., lag feature generation and normalization), training, and evaluation. Forecast performance is evaluated using error metrics such as MAE, MSE, and RMSE.
+
+This package was created as part of the course "Scientific Programming for Wind Energy" at the Technical University of Denmark (DTU) and follows good practices in modular Python development and testing.
 
 ## Quick-start guide
 
