@@ -195,17 +195,18 @@ Method:
 handler.plot_variable("Location1", "Power", 0, 200)
 ```
 
-Now it plots a variable from a location.
+It plots a variable from a location.
 
 
 ## Peer Review
 
-The code was reviewed together with my group. We checked:
+The code was reviewed together by all groupmembers. The method that we followed was to divide the tasks to the three of us and discussed it in person for better communication.
+We checked:
 
 - That functions had clear names and comments
-- That error metrics made sense
 - That the plots were working
-- That linear regression was trained properly
+- The code runs at a proper time in less than 10 min
+- 
 
 After that, we cleaned the main code and pushed the final version to GitHub.
 
