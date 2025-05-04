@@ -28,17 +28,23 @@ git clone https://github.com/DTUWindEducation/final-project-pythonagoras.git
 cd final-project-pythonagoras
 ```
 
+-1st Option:
 2. Install the needed Python packages
 
 ```bash
-pip install pandas numpy scikit-learn matplotlib os tensorflow.keras pickle Tuple
+pip install pandas numpy scikit-learn matplotlib  tensorflow.keras pickle 
 ```
 
 3. Run the project:
    1st Option: Open Visio Studio and then the folder that you have already clone. Go to folder "examples" and then RUN the main.py script
    After every plot that gets generated, PRESS the X button to the plot window to keep running the code
 
-   2nd Option: Open your terminal (Anaconda Prompt, Git Bash, or VSCode terminal), then run: PYTHONPATH=src python3 main.py
+-2nd Option: Open Anaconda -> run: conda create -n tfenv python 3.9
+  -> pip install tensorflow
+  -> pip install pandas
+  -> pip install matplotlib
+  -> pip install scikit-learn
+  -> run python examples/main.py
 --------------------------------------------------------------------------------------------------------------------------------
 ## Architecture
 
